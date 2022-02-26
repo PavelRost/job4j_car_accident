@@ -25,15 +25,15 @@
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                Перечень людей:
+                Автомобильные нарушения:
             </div>
             <div class="card-body">
                 <table class="table">
                     <tbody>
-                    <c:forEach items="${user}" var="name">
+                    <c:forEach items="${accidents}" var="acc">
                         <tr>
                             <td>
-                                <c:out value="${name}"/>
+                                <c:out value="${acc.text}"/>
                             </td>
                         </tr>
                     </c:forEach>
