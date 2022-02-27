@@ -11,13 +11,20 @@ public class AccidentMem {
 
     private final HashMap<Integer, Accident> accidents = new HashMap<>();
 
+    private int id = 0;
+
     public AccidentMem() {
-        accidents.putIfAbsent(1, new Accident(1, "Oleg", "Превышение скорости", "Москва"));
-        accidents.putIfAbsent(2, new Accident(2, "Alex", "Пьяный был", "Вологда"));
+        accidents.putIfAbsent(id++, new Accident(1, "Oleg", "Превышение скорости", "Москва"));
+        accidents.putIfAbsent(id++, new Accident(2, "Alex", "Пьяный был", "Вологда"));
     }
 
     public Collection<Accident> getAllAccidents() {
         return accidents.values();
+    }
+
+    public void add(Accident accident) {
+        accident.setId(id);
+        accidents.putIfAbsent(id++, accident);
     }
 }
 

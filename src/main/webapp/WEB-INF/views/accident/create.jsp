@@ -21,31 +21,29 @@
     <title>Accident</title>
 </head>
 <body>
-<div class="container">
-    <div class="row">
-        <ul class="nav">
-            <li class="nav-item">
-                <a class="nav-link" href="<c:url value='/create'/>">Добавить инцидент</a>
-            </li>
-        </ul>
-    </div>
+
+<div class="container pt-3">
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                Автомобильные нарушения:
+                Форма регистрации автонарушения
             </div>
             <div class="card-body">
-                <table class="table">
-                    <tbody>
-                    <c:forEach items="${accidents}" var="acc">
-                        <tr>
-                            <td>
-                                <c:out value="${acc.text}"/>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
+                <form  action="<c:url value='/save'/>" method='POST'>
+                    <div class="form-group">
+                        <label>Правонарушитель</label>
+                        <input type="text" class="form-control" name="name">
+                    </div>
+                    <div class="form-group">
+                        <label>Описание нарушения</label>
+                        <input type="text" class="form-control" name="text">
+                    </div>
+                    <div class="form-group">
+                        <label>Город</label>
+                        <input type="text" class="form-control" name="address">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+                </form>
             </div>
         </div>
     </div>
