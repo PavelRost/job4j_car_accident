@@ -23,4 +23,12 @@ public class AccidentService {
     public void add(Accident accident) {
         accidentMem.add(accident);
     }
+
+    public Accident findById(int id) {
+        return accidentMem.findById(id);
+    }
+
+    public void updateAccident(int id, Accident accident) {
+        accidentMem.updateAccident(id, accident);
+    }
 }

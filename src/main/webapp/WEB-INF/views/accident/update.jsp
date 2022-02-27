@@ -21,34 +21,29 @@
     <title>Accident</title>
 </head>
 <body>
-<div class="container">
-    <div class="row">
-        <ul class="nav">
-            <li class="nav-item">
-                <a class="nav-link" href="<c:url value='/create'/>">Добавить инцидент</a>
-            </li>
-        </ul>
-    </div>
+
+<div class="container pt-3">
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                Автомобильные нарушения:
+                Форма редактировании инцидента
             </div>
             <div class="card-body">
-                <table class="table">
-                    <tbody>
-                    <c:forEach items="${accidents}" var="acc">
-                        <tr>
-                            <td>
-                                <c:out value="${acc.text}"/>
-                            </td>
-                            <td>
-                                <a href="<c:url value='/update?id=${acc.id}'/>">Редактировать инцидент</a>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
+                <form  action="<c:url value='/updatePost?id=${accident.id}'/>" method='POST'>
+                    <div class="form-group">
+                        <label>Правонарушитель</label>
+                        <input type="text" class="form-control" name="name" value="${accident.name}">
+                    </div>
+                    <div class="form-group">
+                        <label>Описание нарушения</label>
+                        <input type="text" class="form-control" name="text" value="${accident.text}">
+                    </div>
+                    <div class="form-group">
+                        <label>Город</label>
+                        <input type="text" class="form-control" name="address" value="${accident.address}">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </form>
             </div>
         </div>
     </div>

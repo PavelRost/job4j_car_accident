@@ -11,7 +11,7 @@ public class AccidentMem {
 
     private final HashMap<Integer, Accident> accidents = new HashMap<>();
 
-    private int id = 0;
+    private int id = 1;
 
     public AccidentMem() {
         accidents.putIfAbsent(id++, new Accident(1, "Oleg", "Превышение скорости", "Москва"));
@@ -25,6 +25,14 @@ public class AccidentMem {
     public void add(Accident accident) {
         accident.setId(id);
         accidents.putIfAbsent(id++, accident);
+    }
+
+    public Accident findById(int id) {
+        return accidents.get(id);
+    }
+
+    public void updateAccident(int id, Accident accident) {
+        accidents.replace(id, accident);
     }
 }
 
