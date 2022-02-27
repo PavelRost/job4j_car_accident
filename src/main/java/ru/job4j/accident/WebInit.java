@@ -7,7 +7,7 @@ import ru.job4j.accident.config.WebConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletRegistration;
 
-public class WebInit {
+public class WebInit implements WebApplicationInitializer {
 
     public void onStartup(ServletContext servletCxt) {
         AnnotationConfigWebApplicationContext ac = new AnnotationConfigWebApplicationContext();
