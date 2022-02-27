@@ -43,7 +43,7 @@
                                 <c:out value="${acc.text}"/>
                             </td>
                             <td>
-                                <a href="<c:url value='/update?id=${acc.id}'/>">Редактировать инцидент</a>
+                                <a href="<c:url value='/updateGet?id=${acc.id}'/>">Редактировать инцидент</a>
                             </td>
                         </tr>
                     </c:forEach>

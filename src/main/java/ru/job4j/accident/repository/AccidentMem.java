@@ -2,14 +2,24 @@ package ru.job4j.accident.repository;
 
 import org.springframework.stereotype.Repository;
 import ru.job4j.accident.model.Accident;
+import ru.job4j.accident.model.AccidentType;
+
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 
 
 @Repository
 public class AccidentMem {
 
     private final HashMap<Integer, Accident> accidents = new HashMap<>();
+
+    private final List<AccidentType> types = List.of(
+            AccidentType.of(1, "Две машины"),
+            AccidentType.of(2, "Машина и человек"),
+            AccidentType.of(3, "Машина и велосипед"));
+
 
     private int id = 1;
 
@@ -23,6 +33,7 @@ public class AccidentMem {
     }
 
     public void add(Accident accident) {
+        accident.setType(types.get(accident.getType().getId() - 1));
         accident.setId(id);
         accidents.putIfAbsent(id++, accident);
     }

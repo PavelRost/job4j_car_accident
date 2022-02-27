@@ -42,7 +42,16 @@
                         <label>Город</label>
                         <input type="text" class="form-control" name="address">
                     </div>
-                    <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+                    <div class="form-group">
+                        <label>Тип нарушения</label>
+                        <br>
+                        <select name="type.id">
+                            <c:forEach var="type" items="${types}" >
+                                <option value="${type.id}">${type.name}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Зарегистрировать</button>
                 </form>
             </div>
         </div>
