@@ -10,10 +10,10 @@ import java.util.Collection;
 @Service
 public class AccidentService {
 
-    @Autowired
-    private AccidentMem accidentMem;
+    private final AccidentMem accidentMem;
 
-    public AccidentService() {
+    public AccidentService(AccidentMem accidentMem) {
+        this.accidentMem = accidentMem;
     }
 
     public Collection<Accident> getAllAccidents() {
