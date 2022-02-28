@@ -16,24 +16,28 @@ public class AccidentMem {
 
     private final HashMap<Integer, Accident> accidents = new HashMap<>();
 
-    private final List<AccidentType> types = List.of(
-            AccidentType.of(1, "Две машины"),
-            AccidentType.of(2, "Машина и человек"),
-            AccidentType.of(3, "Машина и велосипед"));
+    private final HashMap<Integer, AccidentType> types = new HashMap<>();
 
     private AtomicInteger id = new AtomicInteger(1);
 
     public AccidentMem() {
         accidents.putIfAbsent(id.getAndAdd(1), new Accident(1, "Oleg", "Превышение скорости", "Москва"));
         accidents.putIfAbsent(id.getAndAdd(1), new Accident(2, "Alex", "Пьяный был", "Вологда"));
+        types.putIfAbsent(1, AccidentType.of(1, "Две машины"));
+        types.putIfAbsent(2, AccidentType.of(2, "Машина и человек"));
+        types.putIfAbsent(3, AccidentType.of(3, "Машина и велосипед"));
     }
 
     public Collection<Accident> getAllAccidents() {
         return accidents.values();
     }
 
+    public Collection<AccidentType> getAllAccidentType() {
+        return types.values();
+    }
+
     public void add(Accident accident) {
-        accident.setType(types.get(accident.getType().getId() - 1));
+        accident.setType(types.get(accident.getType().getId()));
         accident.setId(id.get());
         accidents.putIfAbsent(id.getAndAdd(1), accident);
     }
