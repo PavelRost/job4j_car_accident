@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 @Repository
@@ -20,12 +21,11 @@ public class AccidentMem {
             AccidentType.of(2, "Машина и человек"),
             AccidentType.of(3, "Машина и велосипед"));
 
-
-    private int id = 1;
+    private AtomicInteger id = new AtomicInteger(1);
 
     public AccidentMem() {
-        accidents.putIfAbsent(id++, new Accident(1, "Oleg", "Превышение скорости", "Москва"));
-        accidents.putIfAbsent(id++, new Accident(2, "Alex", "Пьяный был", "Вологда"));
+        accidents.putIfAbsent(id.getAndAdd(1), new Accident(1, "Oleg", "Превышение скорости", "Москва"));
+        accidents.putIfAbsent(id.getAndAdd(1), new Accident(2, "Alex", "Пьяный был", "Вологда"));
     }
 
     public Collection<Accident> getAllAccidents() {
@@ -34,8 +34,8 @@ public class AccidentMem {
 
     public void add(Accident accident) {
         accident.setType(types.get(accident.getType().getId() - 1));
-        accident.setId(id);
-        accidents.putIfAbsent(id++, accident);
+        accident.setId(id.get());
+        accidents.putIfAbsent(id.getAndAdd(1), accident);
     }
 
     public Accident findById(int id) {
