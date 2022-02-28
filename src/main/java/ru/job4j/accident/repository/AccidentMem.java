@@ -30,8 +30,8 @@ public class AccidentMem {
         types.putIfAbsent(2, AccidentType.of(2, "Машина и человек"));
         types.putIfAbsent(3, AccidentType.of(3, "Машина и велосипед"));
         rules.putIfAbsent(1, Rule.of(1, "Статья. 1"));
-        rules.putIfAbsent(2, Rule.of(1, "Статья. 2"));
-        rules.putIfAbsent(3, Rule.of(1, "Статья. 3"));
+        rules.putIfAbsent(2, Rule.of(2, "Статья. 2"));
+        rules.putIfAbsent(3, Rule.of(3, "Статья. 3"));
     }
 
     public Collection<Accident> getAllAccidents() {
@@ -46,7 +46,10 @@ public class AccidentMem {
         return rules.values();
     }
 
-    public void add(Accident accident) {
+    public void add(Accident accident, String[] ids) {
+        for (String id : ids) {
+            accident.addRule(rules.get(Integer.parseInt(id)));
+        }
         accident.setType(types.get(accident.getType().getId()));
         accident.setId(id.get());
         accidents.putIfAbsent(id.getAndAdd(1), accident);

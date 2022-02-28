@@ -30,8 +30,8 @@ public class AccidentService {
         return accidentMem.getAllRules();
     }
 
-    public void add(Accident accident) {
-        accidentMem.add(accident);
+    public void add(Accident accident, String[] ids) {
+        accidentMem.add(accident, ids);
     }
 
     public Accident findById(int id) {
