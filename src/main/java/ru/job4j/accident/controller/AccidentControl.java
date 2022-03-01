@@ -26,27 +26,27 @@ public class AccidentControl {
 
     @GetMapping("/create")
     public String create(Model model) {
-        model.addAttribute("types", accidentService.getAllAccidentType());
-        model.addAttribute("rules", accidentService.getAllRules());
+        model.addAttribute("types", accidentService.getAllAccidentTypeHbn());
+        model.addAttribute("rules", accidentService.getAllRulesHbn());
         return "accident/create";
     }
 
     @PostMapping("/save")
     public String save(@ModelAttribute Accident accident, HttpServletRequest req) {
         String[] ids = req.getParameterValues("rIds");
-        accidentService.add(accident, ids);
+        accidentService.addHbn(accident, ids);
         return "redirect:/";
     }
 
     @GetMapping("/updateGet")
     public String update(@RequestParam("id") int id, Model model) {
-        model.addAttribute("accident", accidentService.findById(id));
+        model.addAttribute("accident", accidentService.findByIdHbn(id));
         return "accident/update";
     }
 
     @PostMapping("/updatePost")
     public String update(@RequestParam("id") int id, @ModelAttribute Accident accident) {
-        accidentService.updateAccident(id, accident);
+        accidentService.updateAccidentHbn(id, accident);
         return "redirect:/";
     }
 }
