@@ -7,13 +7,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.job4j.accident.model.Accident;
-import ru.job4j.accident.model.AccidentType;
-import ru.job4j.accident.model.Rule;
 import ru.job4j.accident.service.AccidentService;
-
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @Controller
 public class AccidentControl {
@@ -26,27 +22,27 @@ public class AccidentControl {
 
     @GetMapping("/create")
     public String create(Model model) {
-        model.addAttribute("types", accidentService.getAllAccidentTypeHbn());
-        model.addAttribute("rules", accidentService.getAllRulesHbn());
+        model.addAttribute("types", accidentService.getAllAccidentTypeRep());
+        model.addAttribute("rules", accidentService.getAllRulesRep());
         return "accident/create";
     }
 
     @PostMapping("/save")
     public String save(@ModelAttribute Accident accident, HttpServletRequest req) {
         String[] ids = req.getParameterValues("rIds");
-        accidentService.addHbn(accident, ids);
+        accidentService.addRep(accident, ids);
         return "redirect:/";
     }
 
     @GetMapping("/updateGet")
     public String update(@RequestParam("id") int id, Model model) {
-        model.addAttribute("accident", accidentService.findByIdHbn(id));
+        model.addAttribute("accident", accidentService.findByIdRep(id));
         return "accident/update";
     }
 
     @PostMapping("/updatePost")
     public String update(@RequestParam("id") int id, @ModelAttribute Accident accident) {
-        accidentService.updateAccidentHbn(id, accident);
+        accidentService.updateAccidentRep(id, accident);
         return "redirect:/";
     }
 }
