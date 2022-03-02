@@ -34,19 +34,19 @@ public class AccidentControl {
     @PostMapping("/save")
     public String save(@ModelAttribute Accident accident, HttpServletRequest req) {
         String[] ids = req.getParameterValues("rIds");
-        accidentService.addRep(accident, ids);
+        accidentService.addHbn(accident, ids);
         return "redirect:/";
     }
 
     @GetMapping("/updateGet")
     public String update(@RequestParam("id") int id, Model model) {
-        model.addAttribute("accident", accidentService.findByIdRep(id));
+        model.addAttribute("accident", accidentService.findByIdHbn(id));
         return "accident/update";
     }
 
     @PostMapping("/updatePost")
     public String update(@RequestParam("id") int id, @ModelAttribute Accident accident) {
-        accidentService.updateAccidentRep(id, accident);
+        accidentService.updateAccidentHbn(id, accident);
         return "redirect:/";
     }
 }
