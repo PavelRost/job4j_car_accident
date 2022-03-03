@@ -31,6 +31,9 @@
     </div>
     <div class="row">
         <div class="card" style="width: 100%">
+            <div>
+                Login as : ${user.username}
+            </div>
             <div class="card-header">
                 Автомобильные нарушения:
             </div>
