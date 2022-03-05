@@ -9,26 +9,25 @@ import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.User;
 import ru.job4j.accident.repository.AuthorityRepository;
 import ru.job4j.accident.repository.UserRepository;
+import ru.job4j.accident.service.AccidentService;
 
 @Controller
 public class RegControl {
 
     private final PasswordEncoder encoder;
-    private final UserRepository users;
-    private final AuthorityRepository authorities;
+    private final AccidentService service;
 
-    public RegControl(PasswordEncoder encoder, UserRepository users, AuthorityRepository authorities) {
+    public RegControl(PasswordEncoder encoder, AccidentService service) {
         this.encoder = encoder;
-        this.users = users;
-        this.authorities = authorities;
+        this.service = service;
     }
 
     @PostMapping("/reg")
     public String regSave(@ModelAttribute User user) {
         user.setEnabled(true);
         user.setPassword(encoder.encode(user.getPassword()));
-        user.setAuthority(authorities.findByAuthority("ROLE_USER"));
-        users.save(user);
+        user.setAuthority(service.findByAuthority("ROLE_USER"));
+        service.save(user);
         return "redirect:/login";
     }
 

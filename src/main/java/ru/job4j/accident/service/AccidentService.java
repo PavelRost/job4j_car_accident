@@ -1,9 +1,7 @@
 package ru.job4j.accident.service;
 
 import org.springframework.stereotype.Service;
-import ru.job4j.accident.model.Accident;
-import ru.job4j.accident.model.AccidentType;
-import ru.job4j.accident.model.Rule;
+import ru.job4j.accident.model.*;
 import ru.job4j.accident.repository.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,11 +13,28 @@ public class AccidentService {
     private final AccidentRepository accidentsRep;
     private final TypeRepository typeRep;
     private final RuleRepository ruleRep;
+    private final UserRepository users;
+    private final AuthorityRepository authorities;
 
-    public AccidentService(AccidentRepository accidentsRep, TypeRepository typeRep, RuleRepository ruleRep) {
+    public AccidentService(AccidentRepository accidentsRep,
+                           TypeRepository typeRep,
+                           RuleRepository ruleRep,
+                           UserRepository users,
+                           AuthorityRepository authorities) {
         this.accidentsRep = accidentsRep;
         this.typeRep = typeRep;
         this.ruleRep = ruleRep;
+        this.users = users;
+        this.authorities = authorities;
+    }
+
+    public Authority findByAuthority(String authority) {
+        return authorities.findByAuthority(authority);
+    }
+
+    public void save(User user) {
+        users.save(user);
+
     }
 
     public List<Accident> getAllAccidentRep() {
