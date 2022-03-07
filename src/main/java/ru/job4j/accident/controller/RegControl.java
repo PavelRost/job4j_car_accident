@@ -2,6 +2,7 @@ package ru.job4j.accident.controller;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,7 +24,12 @@ public class RegControl {
     }
 
     @PostMapping("/reg")
-    public String regSave(@ModelAttribute User user) {
+    public String regSave(@ModelAttribute User user, Model model) {
+        User userSearch = service.findByName(user.getUsername());
+        if (userSearch != null) {
+            model.addAttribute("errorMessage", "Пользователь с таким именем уже есть");
+            return "reg";
+        }
         user.setEnabled(true);
         user.setPassword(encoder.encode(user.getPassword()));
         user.setAuthority(service.findByAuthority("ROLE_USER"));

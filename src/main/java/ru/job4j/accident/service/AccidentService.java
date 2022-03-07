@@ -28,6 +28,10 @@ public class AccidentService {
         this.authorities = authorities;
     }
 
+    public User findByName(String username) {
+        return users.findByUsername(username).orElse(null);
+    }
+
     public Authority findByAuthority(String authority) {
         return authorities.findByAuthority(authority);
     }
